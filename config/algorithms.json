@@ -1,0 +1,108 @@
+[
+    {
+        "id": 1,
+        "name": "Sorting",
+        "description": "Algoritmo per ordinare dati",
+        "image_path" : "gui/assets/images/sorting.jpg",
+        "class_path": "gui.views.sorting_algorithm_view.SortingAlgorithmView",
+        "algorithms": [
+            {
+                "id": 0,
+                "name": "Bubble sort",
+                "description": "",
+                "class_path": "algorithms.sorting.bubble_sort.BubbleSortAlgorithm"
+            },
+            {
+                "id": 1,
+                "name": "Cocktail sort",
+                "description": "",
+                "class_path": "algorithms.sorting.cocktail_sort.CocktailSortAlgorithm"
+            },
+            {
+                "id": 2,
+                "name": "Counting sort",
+                "description": "",
+                "class_path": "algorithms.sorting.counting_sort.CountingSortAlgorithm"
+            },
+            {
+                "id": 3,
+                "name": "Heap sort",
+                "description": "",
+                "class_path": "algorithms.sorting.heap_sort.HeapSortAlgorithm"
+            },
+            {
+                "id": 4,
+                "name": "Insertion sort",
+                "description": "",
+                "class_path": "algorithms.sorting.insertion_sort.InsertionSortAlgorithm"
+            },
+            {
+                "id": 5,
+                "name": "Merge sort",
+                "description": "",
+                "class_path": "algorithms.sorting.merge_sort.MergeSortAlgorithm"
+            },
+            {
+                "id": 6,
+                "name": "Quick sort",
+                "description": "",
+                "class_path": "algorithms.sorting.quick_sort.QuickSortAlgorithm"
+            },
+            {
+                "id": 7,
+                "name": "Selection sort",
+                "description": "",
+                "class_path": "algorithms.sorting.selection_sort.SelectionSortAlgorithm"
+            },
+            {
+                "id": 8,
+                "name": "Shell sort",
+                "description": "",
+                "class_path": "algorithms.sorting.shell_sort.ShellSortAlgorithm"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Searching",
+        "description": "",
+        "image_path": "gui/assets/images/searching.jpg",
+        "class_path": "gui.views.searching_algorithm_view.SearchingAlgorithmView",
+        "algorithms": [
+            {
+                "id": 1,
+                "name": "Binary search",
+                "description": ""
+            },
+            {
+                "id": 2,
+                "name": "Interpolation search",
+                "description": ""
+            },
+            {
+                "id": 3,
+                "name": "Jump search",
+                "description": ""
+            },
+            {
+                "id": 4,
+                "name": "Linear search",
+                "description": ""
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Graphs",
+        "description": "",
+        "image_path": "gui/assets/images/graphs.png",
+        "algorithms": []
+    },
+    {
+        "id": 4,
+        "name": "Tree",
+        "description": "",
+        "image_path": "",
+        "algorithms": []
+    }
+]
