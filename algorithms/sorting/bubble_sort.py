@@ -1,7 +1,6 @@
-from email.policy import default
-
 from algorithms.core.base_algorithm import BaseAlgorithm
 from PyQt6.QtGui import QColor
+from config.constants import GRAY, GREEN, RED, LIGHT_RED, BLUE, LIGHT_BLUE
 
 class BubbleSortAlgorithm(BaseAlgorithm):
 
@@ -14,18 +13,19 @@ class BubbleSortAlgorithm(BaseAlgorithm):
         self.j = 0
 
     def _step_impl(self) -> bool:
-        # Logica semplificata del bubble sort
-        if self.i < len(self.data) - 1:
-            if self.j < len(self.data) - self.i - 1:
-                if self.data[self.j] > self.data[self.j + 1]:
-                    self.data[self.j], self.data[self.j + 1] = self.data[self.j + 1], self.data[self.j]
-                self.j += 1
-            else:
-                self.j = 0
-                self.i += 1
-            return True
-        else:
+
+        if self.i >= len(self.data) - 1:
             return False
+
+        if self.j < len(self.data) - self.i - 1:
+            if self.data[self.j] > self.data[self.j + 1]:
+                self.data[self.j], self.data[self.j + 1] = self.data[self.j + 1], self.data[self.j]
+            self.j += 1
+        else:
+            self.j = 0
+            self.i += 1
+
+        return True
 
     def _get_state(self) -> dict:
 
@@ -43,7 +43,7 @@ class BubbleSortAlgorithm(BaseAlgorithm):
 
     def get_visual_state(self):
 
-        default_color = QColor(200, 200, 200)
+        default_color = QColor(*GRAY)
 
         if not self.started:
             return [(val, default_color) for val in self.data]
@@ -52,15 +52,15 @@ class BubbleSortAlgorithm(BaseAlgorithm):
         for idx, val in enumerate(self.data):
 
             if idx > len(self.data) - self.i - 1:
-                color = QColor(0, 255, 0)
+                color = QColor(*GREEN)
             elif idx == self.j or idx == self.j + 1:
                 if self.j + 1 < len(self.data):
                     if self.data[self.j] < self.data[self.j + 1]:
-                        color = QColor(255, 0, 0) if idx == self.j else QColor(255, 80, 80)
+                        color = QColor(*RED) if idx == self.j else QColor(*LIGHT_RED)
                     else:
-                        color = QColor(0, 150, 255) if idx == self.j else QColor(100, 200, 255)
+                        color = QColor(*BLUE) if idx == self.j else QColor(*LIGHT_BLUE)
                 else:
-                    color = default_color  # fuori dai limiti
+                    color = default_color
             else:
                 color = default_color
 

@@ -1,4 +1,4 @@
-import sys, random
+import sys
 from PyQt6.QtWidgets import QApplication
 from gui.views.main_view import MainWindow
 

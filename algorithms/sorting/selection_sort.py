@@ -1,8 +1,12 @@
 from PyQt6.QtGui import QColor
 from algorithms.core.base_algorithm import BaseAlgorithm
-from config.constants import GREEN
+from config.constants import GRAY, GREEN, RED, BLUE
 
 class SelectionSortAlgorithm(BaseAlgorithm):
+
+    def __init__(self, name, data):
+        super().__init__(name, data)
+        self.initialize()
 
     def initialize(self):
         self.i = 0
@@ -11,19 +15,22 @@ class SelectionSortAlgorithm(BaseAlgorithm):
         # self._save_state()  # salva lo stato iniziale
 
     def _step_impl(self) -> bool:
-        if self.i < len(self.data) - 1:
-            if self.j < len(self.data):
-                if self.data[self.j] < self.data[self.min_idx]:
-                    self.min_idx = self.j
-                self.j += 1
-            else:
-                # Scambia l'elemento corrente con il minimo trovato
-                self.data[self.i], self.data[self.min_idx] = self.data[self.min_idx], self.data[self.i]
-                self.i += 1
-                self.j = self.i + 1
-                self.min_idx = self.i
-            return True
-        return False
+
+        if self.i >= len(self.data) - 1:
+            return False
+
+        if self.j < len(self.data):
+            if self.data[self.j] < self.data[self.min_idx]:
+                self.min_idx = self.j
+            self.j += 1
+        else:
+            # Scambia l'elemento corrente con il minimo trovato
+            self.data[self.i], self.data[self.min_idx] = self.data[self.min_idx], self.data[self.i]
+            self.i += 1
+            self.j = self.i + 1
+            self.min_idx = self.i
+
+        return True
 
     def _get_state(self) -> dict:
 
@@ -43,7 +50,7 @@ class SelectionSortAlgorithm(BaseAlgorithm):
 
     def get_visual_state(self):
 
-        default_color = QColor(200, 200, 200)
+        default_color = QColor(*GRAY)
 
         if not self.started:
             return [(val, default_color) for val in self.data]
@@ -54,9 +61,9 @@ class SelectionSortAlgorithm(BaseAlgorithm):
             if idx < self.i:
                 color = QColor(*GREEN)
             elif idx == self.j:
-                color = QColor(255, 0, 0)  # confronto
+                color = QColor(*RED)  # confronto
             elif idx == self.min_idx:
-                color = QColor(0, 0, 255)  # minimo trovato
+                color = QColor(*BLUE)  # minimo trovato
             else:
                 color = default_color
 

@@ -1,4 +1,6 @@
 from PyQt6.QtWidgets import QComboBox, QLabel, QWidget, QVBoxLayout
+from PyQt6.QtGui import QCursor
+from PyQt6.QtCore import Qt
 
 class ComboBox(QWidget):
 
@@ -13,6 +15,8 @@ class ComboBox(QWidget):
 
         self.label = QLabel(label)
         self.combo_box = QComboBox()
+        self.combo_box.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
         self.on_value_change=on_value_change
         
         for value in values:

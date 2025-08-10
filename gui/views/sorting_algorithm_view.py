@@ -4,6 +4,8 @@ from gui.components.common.code_viewer import CodeViewer
 from gui.components.common.settings import Settings
 from gui.components.sorting.canvas import Canvas
 from gui.utils.loader import load_class
+
+from config.constants import MIN_BAR_HEIGHT, MAX_BAR_HEIGHT
 import random
 
 class SortingAlgorithmView(QMainWindow):
@@ -16,7 +18,7 @@ class SortingAlgorithmView(QMainWindow):
 
         # Default algorithm
         algorithm = self.algorithms[0]
-        name, data = algorithm.get("name"), [random.randint(10, 100) for _ in range(30)]
+        name, data = algorithm.get("name"), [random.randint(MIN_BAR_HEIGHT, MAX_BAR_HEIGHT) for _ in range(30)]
 
         AlgorithmClass = load_class(algorithm.get("class_path"))
         self.algorithm = AlgorithmClass(name, data)
@@ -26,6 +28,8 @@ class SortingAlgorithmView(QMainWindow):
         # Layout centrale
         central_widget = QWidget()
         layout = QVBoxLayout()
+        # layout.setSpacing(50)  # Spazio verticale tra i widget
+        # layout.setContentsMargins(100, 100, 10, 10)  # Margini esterni (sinistra, sopra, destra, sotto)
 
         self.settings = Settings(self.algorithm, self.algorithms)
 
@@ -42,10 +46,9 @@ class SortingAlgorithmView(QMainWindow):
         #self.statistics = Statistics()
         #layout.addWidget(self.statistics)
 
-        self.code_viewer = CodeViewer()
-
-        self.code_viewer.load_code(self.algorithm.get_pseudocode())
-        layout.addWidget(self.code_viewer)
+        #self.code_viewer = CodeViewer()
+        #self.code_viewer.load_code(self.algorithm.get_pseudocode())
+        #layout.addWidget(self.code_viewer)
 
         # Canvas per disegno
         self.canvas = Canvas(self.algorithm)
@@ -58,7 +61,7 @@ class SortingAlgorithmView(QMainWindow):
 
         algorithm = list(filter(lambda x: x.get("id") == algorithm_id, self.algorithms))[0]
 
-        name, data = algorithm.get("name"), [random.randint(10, 100) for _ in range(len(self.algorithm.data))]
+        name, data = algorithm.get("name"), [random.randint(MIN_BAR_HEIGHT, MAX_BAR_HEIGHT) for _ in range(len(self.algorithm.data))]
 
         algorithm_class_path = algorithm.get("class_path")
         AlgorithmClass = load_class(algorithm_class_path)
@@ -66,7 +69,7 @@ class SortingAlgorithmView(QMainWindow):
         self.algorithm = AlgorithmClass(name, data)
         self.algorithm.finished_signal.connect(self.reset)
 
-        self.code_viewer.load_code(self.algorithm.get_pseudocode())
+        # self.code_viewer.load_code(self.algorithm.get_pseudocode())
         self.canvas.set_algorithm(self.algorithm)
 
     def change_array_elements_number(self, value):
@@ -77,7 +80,7 @@ class SortingAlgorithmView(QMainWindow):
 
     def generate_new_array(self, value: int):
 
-        new_data = [random.randint(1, 100) for _ in range(value)]
+        new_data = [random.randint(MIN_BAR_HEIGHT, MAX_BAR_HEIGHT) for _ in range(value)]
         self.algorithm.reset()
         self.algorithm.data = new_data
         self.canvas.update()

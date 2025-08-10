@@ -40,20 +40,41 @@ class Canvas(QWidget):
 
         w = self.width()
         h = self.height()
-        bar_width = w / len(visual_data)
+        spacing = 1
+        num_bars = len(visual_data)
+
+        total_spacing = spacing * (num_bars - 1)
+        bar_width = (w - total_spacing) / num_bars
         max_val = max(val for val, _ in visual_data)
 
+        font_size = max(3, int(bar_width * 0.3))
+        font = painter.font()
+        font.setPointSize(font_size)
+        painter.setFont(font)
+
+        font_height = painter.fontMetrics().height()
+        top_margin = font_height + 5
+        usable_height = h - top_margin
+
         for i, (val, color) in enumerate(visual_data):
-            x = i * bar_width
-            bar_height = (val / max_val) * h
+            x = i * (bar_width + spacing)
+            bar_height = (val / max_val) * usable_height
             y = h - bar_height
 
-            # Ombra leggera
             painter.setPen(QColor(0, 0, 0, 40))
             painter.setBrush(color)
-
-            # Barre arrotondate
             painter.drawRoundedRect(int(x), int(y), int(bar_width), int(bar_height), 5, 5)
+
+            painter.setPen(QColor(255, 255, 255))
+            text = str(val)
+            text_width = painter.fontMetrics().horizontalAdvance(text)
+            text_x = int(x + (bar_width - text_width) / 2)
+            text_y = int(y) - 10
+
+            if text_y < font_height:
+                text_y = font_height
+
+            painter.drawText(text_x, text_y, text)
 
     def set_speed(self, ms):
         self.timer.setInterval(ms)

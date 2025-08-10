@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import QSlider, QLabel, QWidget, QVBoxLayout
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QCursor
 
 class Slider(QWidget):
 
@@ -40,6 +41,7 @@ class Slider(QWidget):
         self.slider.setValue(_min)
         self.slider.setSingleStep(single_step)
         self.slider.setFixedSize(w, h)
+        self.slider.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         layout = QVBoxLayout()
         layout.addWidget(self.label)
