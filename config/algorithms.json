@@ -70,24 +70,28 @@
         "class_path": "gui.views.searching_algorithm_view.SearchingAlgorithmView",
         "algorithms": [
             {
-                "id": 1,
+                "id": 0,
                 "name": "Binary search",
-                "description": ""
+                "description": "",
+                "class_path": "algorithms.searching.binary_search.BinarySearchAlgorithm"
+            },
+            {
+                "id": 1,
+                "name": "Interpolation search",
+                "description": "",
+                "class_path": "algorithms.searching.interpolation_search.InterpolationSearchAlgorithm"
             },
             {
                 "id": 2,
-                "name": "Interpolation search",
-                "description": ""
+                "name": "Jump search",
+                "description": "",
+                "class_path": "algorithms.searching.jump_search.JumpSearchAlgorithm"
             },
             {
                 "id": 3,
-                "name": "Jump search",
-                "description": ""
-            },
-            {
-                "id": 4,
                 "name": "Linear search",
-                "description": ""
+                "description": "",
+                "class_path": "algorithms.searching.linear_search.LinearSearchAlgorithm"
             }
         ]
     },

@@ -85,8 +85,7 @@ class Settings(QWidget):
 
         self.elements_slider.setEnabled(True)
         # self.elements_slider.reset()
-
-        self.speed_slider.reset()
+        # self.speed_slider.reset()
 
         self.generate_array_button.setEnabled(True)
         self.start_button.setDisabled(True)

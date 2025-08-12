@@ -3,10 +3,9 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout
 from gui.components.common.code_viewer import CodeViewer
 from gui.components.common.settings import Settings
 from gui.components.sorting.canvas import Canvas
-from gui.utils.loader import load_class
+from gui.utils.utils import load_class, get_unique_array
 
 from config.constants import MIN_BAR_HEIGHT, MAX_BAR_HEIGHT
-import random
 
 class SortingAlgorithmView(QMainWindow):
 
@@ -18,9 +17,10 @@ class SortingAlgorithmView(QMainWindow):
 
         # Default algorithm
         algorithm = self.algorithms[0]
-        name, data = algorithm.get("name"), [random.randint(MIN_BAR_HEIGHT, MAX_BAR_HEIGHT) for _ in range(30)]
 
         AlgorithmClass = load_class(algorithm.get("class_path"))
+        name, data = algorithm.get("name"), get_unique_array(MIN_BAR_HEIGHT, MAX_BAR_HEIGHT, 30)
+
         self.algorithm = AlgorithmClass(name, data)
 
         self.algorithm.finished_signal.connect(self.reset)
@@ -61,7 +61,7 @@ class SortingAlgorithmView(QMainWindow):
 
         algorithm = list(filter(lambda x: x.get("id") == algorithm_id, self.algorithms))[0]
 
-        name, data = algorithm.get("name"), [random.randint(MIN_BAR_HEIGHT, MAX_BAR_HEIGHT) for _ in range(len(self.algorithm.data))]
+        name, data = algorithm.get("name"), get_unique_array(MIN_BAR_HEIGHT, MAX_BAR_HEIGHT, len(self.algorithm.data))
 
         algorithm_class_path = algorithm.get("class_path")
         AlgorithmClass = load_class(algorithm_class_path)
@@ -71,6 +71,7 @@ class SortingAlgorithmView(QMainWindow):
 
         # self.code_viewer.load_code(self.algorithm.get_pseudocode())
         self.canvas.set_algorithm(self.algorithm)
+        self.canvas.update()
 
     def change_array_elements_number(self, value):
         self.generate_new_array(value)
@@ -80,9 +81,9 @@ class SortingAlgorithmView(QMainWindow):
 
     def generate_new_array(self, value: int):
 
-        new_data = [random.randint(MIN_BAR_HEIGHT, MAX_BAR_HEIGHT) for _ in range(value)]
-        self.algorithm.reset()
+        new_data = get_unique_array(MIN_BAR_HEIGHT, MAX_BAR_HEIGHT, value)
         self.algorithm.data = new_data
+        self.algorithm.reset()
         self.canvas.update()
 
     def start_algorithm(self, ms):

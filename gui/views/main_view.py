@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QMainWindow, QStackedWidget
 from gui.components.common.selector import Selector
-from gui.utils.loader import load_class
+from gui.utils.utils import load_class
 import os
 import json
 
